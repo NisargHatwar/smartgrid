@@ -127,16 +127,17 @@ app.get("/api/user/:user", async (req, res) => {
 
 app.post("/recloser/api", async (req, res) => {
   const { fault_type, recloser_attempts, time } = req.body;
-  // Save data in data.json file
-  const data = {
-    fault_type,
-    recloser_attempts,
-    time,
-  };
-  const faults = await readData("faults.json");
-  faults.push(data);
-  await writeData("faults.json", faults);
-  res.status(200).json({ message: "Data saved successfully" });
+  if(permanent_fault || Temp_fault){
+    const faults = await readData("faults.json");
+    const fault_type = ?"Permenant":"Temporary";
+    const recloser_attempts = reclose_attempts;
+    const time = new Date();
+    const data = {fault_type, recloser_attempts, time}
+    faults.push(data);
+    await writeData("faults.json", faults);
+    res.status(200).json({ message: "Data saved successfully" });
+  }
+  return;
 });
 
 app.get("/admin/:sessionID/faults", async (req, res) => {
