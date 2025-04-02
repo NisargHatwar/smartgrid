@@ -143,7 +143,7 @@ app.post("/recloser/api", async (req, res) => {
     console.log(data);
     faults.push(data);
     await writeData("faults.json", faults);
-    res.status(200).json({ message: "Data saved successfully" });
+    return res.status(200).json({ message: "Data saved successfully" });
   }
   return res.status(200).json({ message: "Data saved successfully" });
 });
