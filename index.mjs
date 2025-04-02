@@ -145,7 +145,7 @@ app.post("/recloser/api", async (req, res) => {
     await writeData("faults.json", faults);
     res.status(200).json({ message: "Data saved successfully" });
   }
-  return;
+  return res.status(200).json({ message: "Data saved successfully" });
 });
 
 app.get("/admin/:sessionID/faults", async (req, res) => {
