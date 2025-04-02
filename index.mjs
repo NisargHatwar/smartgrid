@@ -126,6 +126,7 @@ app.get("/api/user/:user", async (req, res) => {
 });
 
 app.post("/recloser/api", async (req, res) => {
+  console.log(req.body);
   const {
     voltage,
     load_status,
@@ -139,6 +140,7 @@ app.post("/recloser/api", async (req, res) => {
     const recloser_attempts = reclose_attempts;
     const time = new Date();
     const data = { fault_type, recloser_attempts, time };
+    console.log(data);
     faults.push(data);
     await writeData("faults.json", faults);
     res.status(200).json({ message: "Data saved successfully" });
